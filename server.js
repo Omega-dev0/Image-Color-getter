@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.post('/get-colors', async (req, res) => {
     const { imageUrl } = req.body;
-
+    console.log(imageUrl, req.body);
     if (!imageUrl) {
         return res.status(400).send('imageUrl is required');
     }
