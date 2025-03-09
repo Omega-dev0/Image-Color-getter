@@ -20,7 +20,7 @@ app.post('/get-colors', async (req, res) => {
         const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
         const imageBuffer = Buffer.from(response.data, 'binary');
         
-        getColors(imageBuffer, 'image/gif').then(colors => {
+        getColors(imageBuffer, 'image/png').then(colors => {
             res.send(colors.map(color => color.rgb()));
         })
     } catch (error) {
