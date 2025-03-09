@@ -24,7 +24,6 @@ app.post('/get-colors', async (req, res) => {
             res.send(colors.map(color => color.rgb()));
         })
     } catch (error) {
-        console.error(error);
         res.status(500).send('Error processing image');
     }
 });
