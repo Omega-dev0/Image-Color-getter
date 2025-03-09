@@ -5,7 +5,7 @@ const path = require('path')
 const getColors = require('get-image-colors')
 
 const app = express();
-const port = 3002;
+const port = 4546;
 
 app.use(express.json());
 
