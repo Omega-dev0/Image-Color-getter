@@ -1,0 +1,16 @@
+{
+  "name": "image-color-getter",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.8.2",
+    "express": "^4.21.2",
+    "get-image-colors": "^4.0.1"
+  }
+}
