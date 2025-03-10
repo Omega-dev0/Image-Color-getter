@@ -3,16 +3,22 @@ const axios = require('axios');
 
 const path = require('path')
 const getColors = require('get-image-colors');
-const { file } = require('bun');
+
+require('dotenv').config();
 
 const app = express();
 const port = 4546;
+
+
 
 app.use(express.json());
 
 app.post('/get-colors', async (req, res) => {
     const { imageUrl } = req.body;
-    
+    const authHeader = req.headers['authorization'];
+    if (!authHeader || authHeader !== 'Bearer ' + process.env.TOKEN) {
+        return res.status(403).send('Forbidden');
+    }
     if (!imageUrl) {
         return res.status(400).send('imageUrl is required');
     }
@@ -24,9 +30,8 @@ app.post('/get-colors', async (req, res) => {
         getColors(imageBuffer, 'image/png').then(colors => {
             const filteredColors = colors.filter(color => {
                 const [r, g, b] = color.rgb();
-                // Calculate brightness using the formula: (0.299*R + 0.587*G + 0.114*B)
                 const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-                return brightness > 40; // Adjust the threshold as needed
+                return brightness > 40;
             });
             if(filteredColors.length >= 1) {
                 return res.send(filteredColors.map(color => color.rgb()));
