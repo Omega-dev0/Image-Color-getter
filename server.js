@@ -40,7 +40,7 @@ app.post('/get-colors', async (req, res) => {
         })
     } catch (error) {
         console.error('Error fetching image:', error);
-        res.status(500).send('Error processing image');
+        res.status(500).send(JSON.stringify(error));
     }
 });
 
